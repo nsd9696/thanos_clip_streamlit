@@ -1,7 +1,7 @@
 import torch
 import clip
 from PIL import Image
-import os
+import os 
 import re
 from tqdm import tqdm, trange
 import random
