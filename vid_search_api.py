@@ -7,6 +7,10 @@ import torchvision
 import streamlit as st
 from PIL import Image
 from tqdm import tqdm
+import pickle
+import base64
+import io
+import json
 
 device = 'cpu'
 model, preprocess = clip.load("ViT-B/32", device = 'cpu')
@@ -57,12 +61,28 @@ def topSimScore(top_num, simScore_list):
 
 def showTopFrames(top_frames, vid_fps, vid_data):
     top_frames_num = list(np.array(top_frames).T[0].astype(int))
-    top_frames_time = list(np.array(top_frames_num )/ vid_fps)
+    top_frames_time = list((np.array(top_frames_num )/ vid_fps).astype(int))
     top_frames_image = [vid_data[i] for i in top_frames_num]
 
     return top_frames_num, top_frames_time, top_frames_image
 
+def showTopSeconds(top_frames, vid_fps):
+    top_frames_num = list(np.array(top_frames).T[0].astype(int))
+    top_frames_time = list((np.array(top_frames_num )/ vid_fps).astype(int))
+    return top_frames_num, top_frames_time
+
 def arrayToImage(top_frames_image):
     return [Image.fromarray(i) for i in top_frames_image]
 
+def download_file(_file,vid_fps):
+    json_temp = {"vid_fps": vid_fps, "vid_encoded_frames": [i.tolist() for i in _file]}
+    json_dumped = json.dumps(json_temp)
+    b64 = base64.b64encode(json_dumped.encode('utf-8')).decode()
+    href = f'<a href="data:file/json;base64,{b64}" download="new_file.json">Download json</a>'
+    st.write(href, unsafe_allow_html=True)
 
+def download_df(df):
+    csv = df.to_csv(index=False)
+    b64 = base64.b64encode(csv.encode('utf-8')).decode()
+    href = f'<a href="data:file/csv;base64,{b64}" download="new_file.csv">Download csv</a>'
+    st.write(href, unsafe_allow_html=True)
