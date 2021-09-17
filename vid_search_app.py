@@ -38,8 +38,6 @@ def app():
 
         else: # file type is json: already compressed
             with st.spinner(text = "Thanos Searching"):
-                # with open(vid_file, 'r') as st_json:
-                # vid_xml = vid_file.read()
                 vid_json = json.load(vid_file)
 
                 vid_fps = float(vid_json['vid_fps'])
