@@ -22,9 +22,9 @@ def app():
         st.image('thanos_image_search_sample.png')
     with st.expander("See explanation"):
         st.write("""
-        - 해당 demo는 Unsplash api를 활용하여 입력한 text 내용으로 이미지를 검색한 뒤 가장 유사한 의미의 이미지를 추천해줍니다.
-        - 현재는 text 입력에 영어만 가능합니다.
-        - 사용할 수 있는 이미지 api가 있다면 더욱 다양하게 활용가능합니다.
+        - Thanos Search는 Unsplash api를 활용하여 입력한 text 내용으로 이미지를 검색한 뒤 가장 유사한 의미의 이미지를 추천해줍니다.
+        - 현재 Demo는 영어버전입니다. text 입력에 영어만 가능합니다.
+        - 고객사에서 사용할 수 있는 api가 있다면 더욱 다양하게 활용 가능합니다.
         - api가 아닌 원본 이미지를 사용할 경우 해당 이미지를 미리 압축하여 이후 더 빠른 검색이 가능합니다.
         """)
             
